@@ -42,7 +42,7 @@ const serve = (done) => {
     done();
 };
 
-const compileHtml = (args, baseHref = '/') => {
+const compileHtml = (done, baseHref = '/') => {
     return gulp.src(`${src}/*.html`)
         .pipe(plumber())
         .pipe(replace('<base href="/">', () => `<base href="${baseHref}">`))
@@ -143,7 +143,7 @@ const watch = () => gulp.watch([
 
 const dev = gulp.series(copyNodeModules, compileHtml, compileSass, compileJs, serve, watch);
 const build = gulp.series(copyNodeModules, (done) => {
-    compileHtml(done, 'sb-admin-2-lit-version/');
+    compileHtml(done, '/sb-admin-2-lit-version/');
     done();
 }, compileSass, compileJs);
 
