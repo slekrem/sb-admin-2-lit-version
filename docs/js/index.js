@@ -2536,11 +2536,15 @@
     ];
 
     function getView(pathname) {
-        const actualPath = decodeURI(pathname)
+        let actualPath = decodeURI(pathname)
             .toString()
             .replace(/\/$/, '')
-            .replace(/^\//, '')
-            .split('/');
+            .replace(/^\//, ''),
+            baseHref = document.querySelector('base').href.replace(location.origin, '');
+
+        if (baseHref !== '/')
+            actualPath = actualPath.replace(baseHref, '');
+        actualPath = actualPath.split('/');
 
         let name = '';
         let urlData = {};
