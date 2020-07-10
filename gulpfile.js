@@ -18,6 +18,7 @@ const gulp = require('gulp'),
     nodeResolve = require('@rollup/plugin-node-resolve'),
     merge = require("merge-stream"),
     modRewrite = require('connect-modrewrite'),
+    replace = require('gulp-replace'),
     src = './src',
     dest = './docs';
 
@@ -41,9 +42,10 @@ const serve = (done) => {
     done();
 };
 
-const compileHtml = () => {
+const compileHtml = (args, baseHref = '/') => {
     return gulp.src(`${src}/*.html`)
         .pipe(plumber())
+        .pipe(replace('<base href="/">', () => `<base href="${baseHref}">`))
         .pipe(htmlmin({
             collapseWhitespace: true,
             removeComments: true,
@@ -140,7 +142,10 @@ const watch = () => gulp.watch([
 ], gulp.series(compileHtml, compileSass, compileJs, reload));
 
 const dev = gulp.series(copyNodeModules, compileHtml, compileSass, compileJs, serve, watch);
-const build = gulp.series(copyNodeModules, compileHtml, compileSass, compileJs);
+const build = gulp.series(copyNodeModules, (done) => {
+    compileHtml(done, 'sb-admin-2-lit-version/');
+    done();
+}, compileSass, compileJs);
 
 exports.dev = dev;
 exports.build = build;
