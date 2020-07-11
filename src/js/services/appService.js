@@ -76,9 +76,11 @@ export function getView(pathname) {
         .toString()
         .replace(/\/$/, '')
         .replace(/^\//, ''),
-        baseHref = document.querySelector('base').href.replace(location.origin, '');
+        baseHref = document.querySelector('base').href.replace(location.origin, '')
+            .replace(/\/$/, '')
+            .replace(/^\//, '');
 
-    if (baseHref !== '/')
+    if (baseHref === actualPath)
         actualPath = actualPath.replace(baseHref, '');
     actualPath = actualPath.split('/');
 
