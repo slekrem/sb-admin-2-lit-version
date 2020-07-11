@@ -58,6 +58,12 @@ const compileHtml = (done, baseHref = '/') => {
         .pipe(gulp.dest(`${dest}`))
 };
 
+const create404GhPage = () => {
+    return gulp.src(`${dest}/index.html`)
+        .pipe(rename('404.html'))
+        .pipe(gulp.dest(dest));
+};
+
 const compileSass = () => {
     return gulp.src(`${src}/sass/**/*.sass`)
         .pipe(plumber())
@@ -145,7 +151,7 @@ const dev = gulp.series(copyNodeModules, compileHtml, compileSass, compileJs, se
 const build = gulp.series(copyNodeModules, (done) => {
     compileHtml(done, '/sb-admin-2-lit-version/');
     done();
-}, compileSass, compileJs);
+}, create404GhPage, compileSass, compileJs);
 
 exports.dev = dev;
 exports.build = build;
