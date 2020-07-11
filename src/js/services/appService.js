@@ -72,6 +72,7 @@ const routeData = [
 ];
 
 export function getView(pathname) {
+
     let actualPath = decodeURI(pathname)
         .toString()
         .replace(/\/$/, '')
@@ -80,9 +81,9 @@ export function getView(pathname) {
             .replace(/\/$/, '')
             .replace(/^\//, '');
 
-    if (baseHref === actualPath)
+    if (actualPath.includes(baseHref))
         actualPath = actualPath.replace(baseHref, '');
-    actualPath = actualPath.split('/');
+    actualPath = actualPath.split('/').filter(String);
 
     let name = '';
     let urlData = {};
@@ -94,7 +95,8 @@ export function getView(pathname) {
             .toString()
             .replace(/\/$/, '')
             .replace(/^\//, '')
-            .split('/');
+            .split('/')
+            .filter(String);
 
         if (actualPath.length === expectedPath.length) {
             name = x.name;
@@ -121,4 +123,4 @@ export function getView(pathname) {
     });
 
     return { name, urlData, layout };
-}
+};

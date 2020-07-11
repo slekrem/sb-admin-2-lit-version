@@ -2536,6 +2536,7 @@
     ];
 
     function getView(pathname) {
+
         let actualPath = decodeURI(pathname)
             .toString()
             .replace(/\/$/, '')
@@ -2544,9 +2545,9 @@
                 .replace(/\/$/, '')
                 .replace(/^\//, '');
 
-        if (baseHref === actualPath)
+        if (actualPath.includes(baseHref))
             actualPath = actualPath.replace(baseHref, '');
-        actualPath = actualPath.split('/');
+        actualPath = actualPath.split('/').filter(String);
 
         let name = '';
         let urlData = {};
@@ -2558,7 +2559,8 @@
                 .toString()
                 .replace(/\/$/, '')
                 .replace(/^\//, '')
-                .split('/');
+                .split('/')
+                .filter(String);
 
             if (actualPath.length === expectedPath.length) {
                 name = x.name;
