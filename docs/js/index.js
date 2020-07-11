@@ -3385,7 +3385,7 @@
         render() {
             return html`
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar" style="height: 100%;">
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
@@ -3393,7 +3393,7 @@
             </a>
             <hr class="sidebar-divider my-0">
             <li class="nav-item active">
-                <a class="nav-link" href="/">
+                <a class="nav-link" href="">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span>
                 </a>
@@ -3408,8 +3408,8 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Custom Components:</h6>
-                        <a class="collapse-item" href="/buttons">Buttons</a>
-                        <a class="collapse-item" href="/cards">Cards</a>
+                        <a class="collapse-item" href="buttons">Buttons</a>
+                        <a class="collapse-item" href="cards">Cards</a>
                     </div>
                 </div>
             </li>
@@ -3421,10 +3421,10 @@
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Custom Utilities:</h6>
-                        <a class="collapse-item" href="/colors">Colors</a>
-                        <a class="collapse-item" href="/borders">Borders</a>
-                        <a class="collapse-item" href="/animations">Animations</a>
-                        <a class="collapse-item" href="/others">Other</a>
+                        <a class="collapse-item" href="colors">Colors</a>
+                        <a class="collapse-item" href="borders">Borders</a>
+                        <a class="collapse-item" href="animations">Animations</a>
+                        <a class="collapse-item" href="others">Other</a>
                     </div>
                 </div>
             </li>
@@ -3438,24 +3438,24 @@
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Login Screens:</h6>
-                        <a class="collapse-item" href="/login">Login</a>
-                        <a class="collapse-item" href="/register">Register</a>
-                        <a class="collapse-item" href="/forgot">Forgot Password</a>
+                        <a class="collapse-item" href="login">Login</a>
+                        <a class="collapse-item" href="register">Register</a>
+                        <a class="collapse-item" href="forgot">Forgot Password</a>
                         <div class="collapse-divider"></div>
                         <h6 class="collapse-header">Other Pages:</h6>
-                        <a class="collapse-item" href="/404">404 Page</a>
-                        <a class="collapse-item" href="/blank">Blank Page</a>
+                        <a class="collapse-item" href="404">404 Page</a>
+                        <a class="collapse-item" href="blank">Blank Page</a>
                     </div>
                 </div>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/charts">
+                <a class="nav-link" href="charts">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Charts</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/tables">
+                <a class="nav-link" href="tables">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Tables</span>
                 </a>
@@ -3958,7 +3958,7 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="text-center">
-                                        <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;" src="/img/undraw_posting_photo.svg" alt="">
+                                        <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;" src="img/undraw_posting_photo.svg" alt="">
                                     </div>
                                     <p>
                                         Add some quality, svg illustrations to your project courtesy of 
@@ -4165,7 +4165,7 @@
                 <div class="error mx-auto" data-text="404">404</div>
                 <p class="lead text-gray-800 mb-5">Page Not Found</p>
                 <p class="text-gray-500 mb-0">It looks like you found a glitch in the matrix...</p>
-                <a href="/">&larr; Back to Dashboard</a>
+                <a href="">&larr; Back to Dashboard</a>
             </div>
         </div>
         `;
@@ -5744,7 +5744,7 @@
                     <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                     <div class="modal-footer">
                         <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                        <a class="btn btn-primary" href="/login">Logout</a>
+                        <a class="btn btn-primary" href="login" @click="${this._onLogoutClick}">Logout</a>
                     </div>
                 </div>
             </div>
@@ -5754,6 +5754,10 @@
 
         stateChanged(state) {
             this._viewName = state.app.viewData.name;    }
+
+        _onLogoutClick() {
+            $('#logoutModal').modal('hide');
+        }
     }
 
     window.customElements.define(SbAdmin2PrivateLayout.is, SbAdmin2PrivateLayout);
@@ -5789,25 +5793,25 @@
                                                     <label class="custom-control-label" for="customCheck">Remember Me</label>
                                                 </div>
                                             </div>
-                                            <a href="/" class="btn btn-primary btn-user btn-block">
+                                            <a href="" class="btn btn-primary btn-user btn-block">
                                                 Login
                                             </a>
                                             <hr>
-                                            <a href="/" class="btn btn-google btn-user btn-block">
+                                            <a href="" class="btn btn-google btn-user btn-block">
                                                 <i class="fab fa-google fa-fw"></i> 
                                                 Login with Google
                                             </a>
-                                            <a href="/" class="btn btn-facebook btn-user btn-block">
+                                            <a href="" class="btn btn-facebook btn-user btn-block">
                                                 <i class="fab fa-facebook-f fa-fw"></i> 
                                                 Login with Facebook
                                             </a>
                                         </form>
                                         <hr>
                                         <div class="text-center">
-                                            <a class="small" href="/forgot">Forgot Password?</a>
+                                            <a class="small" href="forgot">Forgot Password?</a>
                                         </div>
                                         <div class="text-center">
-                                            <a class="small" href="/register">Create an Account!</a>
+                                            <a class="small" href="register">Create an Account!</a>
                                         </div>
                                     </div>
                                 </div>
@@ -5859,25 +5863,25 @@
                                             <input type="password" class="form-control form-control-user" id="exampleRepeatPassword" placeholder="Repeat Password">
                                         </div>
                                     </div>
-                                    <a href="/login" class="btn btn-primary btn-user btn-block">
+                                    <a href="login" class="btn btn-primary btn-user btn-block">
                                         Register Account
                                     </a>
                                     <hr>
-                                    <a href="/" class="btn btn-google btn-user btn-block">
+                                    <a href="" class="btn btn-google btn-user btn-block">
                                         <i class="fab fa-google fa-fw"></i> 
                                         Register with Google
                                     </a>
-                                    <a href="/" class="btn btn-facebook btn-user btn-block">
+                                    <a href="" class="btn btn-facebook btn-user btn-block">
                                         <i class="fab fa-facebook-f fa-fw"></i> 
                                         Register with Facebook
                                     </a>
                                 </form>
                                 <hr>
                                 <div class="text-center">
-                                    <a class="small" href="/forgot">Forgot Password?</a>
+                                    <a class="small" href="forgot">Forgot Password?</a>
                                 </div>
                                 <div class="text-center">
-                                    <a class="small" href="/login">Already have an account? Login!</a>
+                                    <a class="small" href="login">Already have an account? Login!</a>
                                 </div>
                             </div>
                         </div>
@@ -5916,14 +5920,14 @@
                                             <div class="form-group">
                                                 <input type="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address...">
                                             </div>
-                                            <a href="/login" class="btn btn-primary btn-user btn-block">Reset Password</a>
+                                            <a href="login" class="btn btn-primary btn-user btn-block">Reset Password</a>
                                         </form>
                                         <hr>
                                         <div class="text-center">
-                                            <a class="small" href="/register">Create an Account!</a>
+                                            <a class="small" href="register">Create an Account!</a>
                                         </div>
                                         <div class="text-center">
-                                            <a class="small" href="/login">Already have an account? Login!</a>
+                                            <a class="small" href="login">Already have an account? Login!</a>
                                         </div>
                                     </div>
                                 </div>
