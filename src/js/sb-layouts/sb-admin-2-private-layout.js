@@ -18,6 +18,7 @@ import '../views/blank-view';
 import '../views/charts-view';
 import '../views/tables-view';
 import '../views/profile-view';
+import '../views/settings-view';
 
 export default class SbAdmin2PrivateLayout extends connect(store)(LitElement) {
     static get is() { return 'sb-admin-2-private-layout'; }
@@ -57,6 +58,8 @@ export default class SbAdmin2PrivateLayout extends connect(store)(LitElement) {
                 return html`<tables-view></tables-view>`;
             case 'profile':
                 return html`<profile-view></profile-view>`;
+            case 'settings':
+                return html`<settings-view></settings-view>`;
             case '404':
             default:
                 return html`<not-found-view></not-found-view>`;
