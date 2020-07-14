@@ -4,6 +4,20 @@ import { LitElement, html } from "lit-element";
 
 export default class SbAdmin2Topbar extends connect(store)(LitElement) {
     static get is() { return 'sb-admin-2-topbar'; }
+    static get properties() {
+        return {
+            _firstName: String,
+            _lastName: String,
+            _avatarName: String,
+        };
+    }
+
+    constructor() {
+        super();
+        this._firstName = '';
+        this._lastName = '';
+        this._avatarName = '';
+    }
 
     createRenderRoot() { return this; }
     render() {
@@ -136,8 +150,8 @@ export default class SbAdmin2Topbar extends connect(store)(LitElement) {
                 <div class="topbar-divider d-none d-sm-block"></div>
                 <li class="nav-item dropdown no-arrow">
                     <a class="nav-link dropdown-toggle" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span class="mr-2 d-none d-lg-inline text-gray-600 small">Valerie Luna</span>
-                        <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
+                        <span class="mr-2 d-none d-lg-inline text-gray-600 small">${this._firstName} ${this._lastName}</span>
+                        <img class="img-profile rounded-circle" src="https://eu.ui-avatars.com/api/?name=${this._avatarName}">
                     </a>
                     <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                         <a class="dropdown-item" href="profile">
@@ -162,6 +176,12 @@ export default class SbAdmin2Topbar extends connect(store)(LitElement) {
             </ul>
         </nav>
         `;
+    }
+
+    stateChanged(state) {
+        this._firstName = state.profile.profileData.firstName;
+        this._lastName = state.profile.profileData.lastName;
+        this._avatarName = encodeURI(`${this._firstName} ${this._lastName}`);
     }
 }
 

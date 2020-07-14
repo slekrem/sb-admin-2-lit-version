@@ -19,5 +19,6 @@ export const store = createStore(
 );
 
 import app from './reducers/appReducer';
+import profile from './reducers/profileReducer';
 
-store.addReducers({ app });
+store.addReducers({ app, profile });

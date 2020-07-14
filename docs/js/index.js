@@ -3339,6 +3339,32 @@
         }
     };
 
+    const SET_PROFILE_DATA = 'SET_PROFILE_DATA';
+
+    const setProfileData = (payload) => dispatch => dispatch({
+        type: SET_PROFILE_DATA,
+        payload
+    });
+
+    const INITIAL_STATE$1 = {
+        profileData: {
+            firstName: 'Max',
+            lastName: 'Mustermann'
+        }
+    };
+
+    const profile = (state = INITIAL_STATE$1, action) => {
+        switch (action.type) {
+            case SET_PROFILE_DATA:
+                return {
+                    ...state,
+                    profileData: action.payload
+                }
+            default:
+                return state;
+        }
+    };
+
     const devCompose = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
     const store = createStore(
@@ -3349,7 +3375,7 @@
         )
     );
 
-    store.addReducers({ app });
+    store.addReducers({ app, profile });
 
     /**
     @license
@@ -3539,6 +3565,20 @@
 
     class SbAdmin2Topbar extends connect(store)(LitElement) {
         static get is() { return 'sb-admin-2-topbar'; }
+        static get properties() {
+            return {
+                _firstName: String,
+                _lastName: String,
+                _avatarName: String,
+            };
+        }
+
+        constructor() {
+            super();
+            this._firstName = '';
+            this._lastName = '';
+            this._avatarName = '';
+        }
 
         createRenderRoot() { return this; }
         render() {
@@ -3671,8 +3711,8 @@
                 <div class="topbar-divider d-none d-sm-block"></div>
                 <li class="nav-item dropdown no-arrow">
                     <a class="nav-link dropdown-toggle" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span class="mr-2 d-none d-lg-inline text-gray-600 small">Valerie Luna</span>
-                        <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
+                        <span class="mr-2 d-none d-lg-inline text-gray-600 small">${this._firstName} ${this._lastName}</span>
+                        <img class="img-profile rounded-circle" src="https://eu.ui-avatars.com/api/?name=${this._avatarName}">
                     </a>
                     <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                         <a class="dropdown-item" href="profile">
@@ -3697,6 +3737,12 @@
             </ul>
         </nav>
         `;
+        }
+
+        stateChanged(state) {
+            this._firstName = state.profile.profileData.firstName;
+            this._lastName = state.profile.profileData.lastName;
+            this._avatarName = encodeURI(`${this._firstName} ${this._lastName}`);
         }
     }
 
@@ -5689,19 +5735,99 @@
 
     window.customElements.define(TablesView.is, TablesView);
 
+    const updateProfileDetailsAsync = (formData) => new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve({
+                succeeded: true,
+                payload: {
+                    firstName: formData.get('firstName'),
+                    lastName: formData.get('lastName')
+                }
+            });
+        }, 2000);
+    });
+
     class ProfileView extends (connect(store))(LitElement) {
         static get is() { return 'profile-view'; }
+        static get properties() {
+            return {
+                _loading: Boolean,
+                _firstName: String,
+                _lastName: String
+            };
+        }
+
+        constructor() {
+            super();
+            this._loading = false;
+            this._firstName = '';
+            this._lastName = '';
+        }
+
+        _renderProfileForm() {
+            return html`
+        <form @submit="${this._onFormSubmitAsync}">
+            <div class="form-group row">
+                <label class="col-4 col-form-label" for="firstName">First Name</label>
+                <div class="col-8">
+                    <input id="firstName" name="firstName" placeholder="Max" required class="form-control" ?disabled="${this._loading}" value="${this._firstName}">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="lastName" class="col-4 col-form-label">Last Name</label>
+                <div class="col-8">
+                    <input id="lastName" name="lastName" placeholder="Mustermann" required class="form-control" ?disabled="${this._loading}" value="${this._lastName}">
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="offset-4 col-8">
+                    <button name="submit" type="submit" class="btn btn-primary" ?disabled="${this._loading}">Submit</button>
+                </div>
+            </div>
+        </form>
+        `;
+        }
 
         createRenderRoot() { return this; }
         render() {
             return html`
         <div class="container-fluid">
             <h1 class="h3 mb-4 text-gray-800">Profile</h1>
+            
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Profile Details</h6>
+                        </div>
+                        <div class="card-body">
+                            ${this._renderProfileForm()}
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         `;
         }
-    }
 
+        stateChanged(state) { 
+            this._firstName = state.profile.profileData.firstName;
+            this._lastName = state.profile.profileData.lastName;
+        }
+
+        async _onFormSubmitAsync(event) {
+            event.preventDefault();
+            const form = event.srcElement || event.target,
+                formData = new FormData(form);
+
+            this._loading = true;
+            const result = await updateProfileDetailsAsync(formData);
+            this._loading = false;
+
+            if (result.succeeded)
+                store.dispatch(setProfileData(result.payload));
+        }
+    }
     window.customElements.define(ProfileView.is, ProfileView);
 
     class SettingsView extends connect(store)(LitElement) {
