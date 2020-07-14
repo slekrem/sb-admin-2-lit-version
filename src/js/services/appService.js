@@ -79,6 +79,11 @@ const routeData = [
         url: '/settings',
         layout: 'private'
     },
+    {
+        name: 'activity-log',
+        url: '/activity-log',
+        layout: 'private'
+    },
 ];
 
 export function getView(pathname) {

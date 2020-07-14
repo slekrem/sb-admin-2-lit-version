@@ -2543,6 +2543,11 @@
             url: '/settings',
             layout: 'private'
         },
+        {
+            name: 'activity-log',
+            url: '/activity-log',
+            layout: 'private'
+        },
     ];
 
     function getView(pathname) {
@@ -3678,7 +3683,7 @@
                             <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                             Settings
                         </a>
-                        <a class="dropdown-item" href="#">
+                        <a class="dropdown-item" href="activity-log">
                             <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
                             Activity Log
                         </a>
@@ -5714,6 +5719,21 @@
 
     window.customElements.define(SettingsView.is, SettingsView);
 
+    class ActivityLogView extends connect(store)(LitElement) {
+        static get is() { return 'activity-log-view'; }
+
+        createRenderRoot() { return this; }
+        render() {
+            return html`
+        <div class="container-fluid">
+            <h1 class="h3 mb-4 text-gray-800">Activity Log</h1>
+        </div>
+        `;
+        }
+    }
+
+    window.customElements.define(ActivityLogView.is, ActivityLogView);
+
     class SbAdmin2PrivateLayout extends connect(store)(LitElement) {
         static get is() { return 'sb-admin-2-private-layout'; }
         static get properties() {
@@ -5754,6 +5774,8 @@
                     return html`<profile-view></profile-view>`;
                 case 'settings':
                     return html`<settings-view></settings-view>`;
+                case 'activity-log':
+                    return html`<activity-log-view></activity-log-view>`;
                 case '404':
                 default:
                     return html`<not-found-view></not-found-view>`;
