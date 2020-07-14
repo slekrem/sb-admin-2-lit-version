@@ -2,7 +2,7 @@
   "_args": [
     [
       "@fortawesome/fontawesome-free@5.13.1",
-      "C:\\Users\\Stefan\\Documents\\stefan\\GitHub\\sb-admin-2-lit-version"
+      "C:\\Users\\Stefan\\Desktop\\Tor Browser\\sb-admin-2-lit-version"
     ]
   ],
   "_from": "@fortawesome/fontawesome-free@5.13.1",
@@ -27,7 +27,7 @@
   ],
   "_resolved": "https://registry.npmjs.org/@fortawesome/fontawesome-free/-/fontawesome-free-5.13.1.tgz",
   "_spec": "5.13.1",
-  "_where": "C:\\Users\\Stefan\\Documents\\stefan\\GitHub\\sb-admin-2-lit-version",
+  "_where": "C:\\Users\\Stefan\\Desktop\\Tor Browser\\sb-admin-2-lit-version",
   "author": {
     "name": "Dave Gandy",
     "email": "dave@fontawesome.com",

@@ -2,7 +2,7 @@
   "_args": [
     [
       "@webcomponents/webcomponentsjs@2.4.3",
-      "C:\\Users\\Stefan\\Documents\\stefan\\GitHub\\sb-admin-2-lit-version"
+      "C:\\Users\\Stefan\\Desktop\\Tor Browser\\sb-admin-2-lit-version"
     ]
   ],
   "_from": "@webcomponents/webcomponentsjs@2.4.3",
@@ -27,7 +27,7 @@
   ],
   "_resolved": "https://registry.npmjs.org/@webcomponents/webcomponentsjs/-/webcomponentsjs-2.4.3.tgz",
   "_spec": "2.4.3",
-  "_where": "C:\\Users\\Stefan\\Documents\\stefan\\GitHub\\sb-admin-2-lit-version",
+  "_where": "C:\\Users\\Stefan\\Desktop\\Tor Browser\\sb-admin-2-lit-version",
   "author": {
     "name": "The Polymer Project Authors",
     "url": "https://polymer.github.io/AUTHORS.txt"

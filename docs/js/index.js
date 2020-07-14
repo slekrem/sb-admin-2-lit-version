@@ -2533,6 +2533,11 @@
             url: '/tables',
             layout: 'private'
         },
+        {
+            name: 'profile',
+            url: '/profile',
+            layout: 'private'
+        },
     ];
 
     function getView(pathname) {
@@ -3660,7 +3665,7 @@
                         <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
                     </a>
                     <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                        <a class="dropdown-item" href="#">
+                        <a class="dropdown-item" href="profile">
                             <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                             Profile
                         </a>
@@ -5674,6 +5679,21 @@
 
     window.customElements.define(TablesView.is, TablesView);
 
+    class ProfileView extends (connect(store))(LitElement) {
+        static get is() { return 'profile-view'; }
+
+        createRenderRoot() { return this; }
+        render() {
+            return html`
+        <div class="container-fluid">
+            <h1 class="h3 mb-4 text-gray-800">Profile</h1>
+        </div>
+        `;
+        }
+    }
+
+    window.customElements.define(ProfileView.is, ProfileView);
+
     class SbAdmin2PrivateLayout extends connect(store)(LitElement) {
         static get is() { return 'sb-admin-2-private-layout'; }
         static get properties() {
@@ -5710,6 +5730,8 @@
                     return html`<charts-view></charts-view>`;
                 case 'tables':
                     return html`<tables-view></tables-view>`;
+                case 'profile':
+                    return html`<profile-view></profile-view>`;
                 case '404':
                 default:
                     return html`<not-found-view></not-found-view>`;

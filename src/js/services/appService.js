@@ -69,6 +69,11 @@ const routeData = [
         url: '/tables',
         layout: 'private'
     },
+    {
+        name: 'profile',
+        url: '/profile',
+        layout: 'private'
+    },
 ];
 
 export function getView(pathname) {
