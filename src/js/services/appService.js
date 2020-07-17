@@ -84,6 +84,11 @@ const routeData = [
         url: '/activity-log',
         layout: 'private'
     },
+    {
+        name: 'a-frame',
+        url: '/a-frame',
+        layout: 'private'
+    },
 ];
 
 export function getView(pathname) {
