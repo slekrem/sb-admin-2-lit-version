@@ -20,6 +20,7 @@ import '../views/tables-view';
 import '../views/profile-view';
 import '../views/settings-view';
 import '../views/activity-log-view';
+import '../views/a-frame-view';
 
 export default class SbAdmin2PrivateLayout extends connect(store)(LitElement) {
     static get is() { return 'sb-admin-2-private-layout'; }
@@ -63,6 +64,8 @@ export default class SbAdmin2PrivateLayout extends connect(store)(LitElement) {
                 return html`<settings-view></settings-view>`;
             case 'activity-log':
                 return html`<activity-log-view></activity-log-view>`;
+            case 'a-frame':
+                return html`<a-frame-view></a-frame-view>`;
             case '404':
             default:
                 return html`<not-found-view></not-found-view>`;
